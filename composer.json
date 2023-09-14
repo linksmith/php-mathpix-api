@@ -1,5 +1,5 @@
 {
-    "name": "yangcp/php-mathpix-api",
+    "name": "linksmith/php-mathpix-api",
     "authors": [
         {
             "name": "ycp19940225",
@@ -14,5 +14,10 @@
             "Yangcp\\": "src/"
         }
     },
-    "license": "MIT"
+    "license": "MIT",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0"
+        }
+    }
 }
