@@ -4,6 +4,7 @@ namespace Yangcp\mathpix;
 
 
 
+use GuzzleHttp\RequestOptions;
 use Yangcp\helper\Func;
 
 /**
@@ -50,6 +51,42 @@ class MathpixApi{
                 "Content-type" => "application/json"
             ]
         ];
+        return Func::guzzle_request($url, 'post', $options);
+    }
+
+    /**
+     * @param $src
+     * @return array
+     */
+    public function request_pdf($src)
+    {
+        $url = 'https://api.mathpix.com/v3/pdf';
+
+//        $data = base64_encode(file_get_contents($src));
+        $options = [
+            RequestOptions::HEADERS => [
+                "app_id" => $this->config['app_id'],
+                "app_key" => $this->config['app_key'],
+            ],
+            RequestOptions::MULTIPART => [
+                [
+                    'name' => 'file',
+                    'contents' => fopen($src, 'r')
+                ],
+                [
+                    'name' => 'options_json',
+                    'contents' => json_encode([
+                        "conversion_formats" => [
+                            "docx" => true,
+                            "tex.zip" => true
+                        ],
+                        "math_inline_delimiters" => ["$", "$"],
+                        "rm_spaces" => true
+                    ])
+                ]
+            ]
+        ];
+
         return Func::guzzle_request($url, 'post', $options);
     }
 }

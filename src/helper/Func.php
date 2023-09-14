@@ -2,6 +2,8 @@
 
 namespace Yangcp\helper;
 
+use GuzzleHttp\RequestOptions;
+
 /**
  * 通用函數
  * Class Func
